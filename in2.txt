@@ -1,0 +1,32 @@
+script pra acionar gpio com botao externo ligado no +3v e na gpio
+
+
+#!/usr/bin/python coding: utf-8
+print
+import RPi.GPIO as GPIO
+import time
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(36, GPIO.OUT)   # pino de saida acende o led
+GPIO.setup(11, GPIO.IN)    # Pino do botão como IN que aciona o led #no caso o vcc +3v tem q ta de um lado do botao e do outro o gpio
+
+print('Pressione Ctrl+C para sair')
+# Loop principal
+try:
+      while True:
+          if GPIO.input(11) == GPIO.LOW:
+             print('off o LED...')
+             GPIO.output(36, 0)
+          else:
+             print('liga o LED...')
+             GPIO.output(36, 1)
+
+        # Aguarda um tempo
+          time.sleep(1)
+
+except KeyboardInterrupt:
+    # Ctrl+C foi pressionado
+    pass
+
+GPIO.output(36, 0)
+GPIO.cleanup()  # Limpa configuração
