@@ -1,0 +1,19 @@
+#!/usr/bin/python
+#coding: utf-8
+print
+import RPi.GPIO as GPIO
+import time
+import sys
+import os
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11,GPIO.IN)
+
+try:
+   while True:
+    if GPIO.input(11)==0:
+       print ("Open")
+    else:
+       print ("Closed")
+
+finally:
+   GPIO.cleanup()
